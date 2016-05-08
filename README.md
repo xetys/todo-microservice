@@ -55,7 +55,7 @@ And wait for some minutes while the virtual cloud is booting up.
 
 
 
-[JHipster]: https://jhipster.github,io
+[JHipster]: https://jhipster.github.io
 [JDL]: https://jhipster.github.io/jdl/
 [JDL Studio]: https://jhipster.github.io/jdl-studio/
 [NodeJS]: https://nodejs.org/
