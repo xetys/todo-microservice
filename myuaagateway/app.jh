@@ -1,0 +1,7 @@
+entity TodoEntry {
+  title String required,
+  percentDone Integer min(0) max(100),
+  deadLine LocalDate
+}
+
+paginate TodoEntry with pager

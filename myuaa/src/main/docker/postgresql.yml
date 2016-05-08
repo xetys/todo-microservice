@@ -1,0 +1,12 @@
+version: '2'
+services:
+    myuaa-postgresql:
+        container_name: myuaa-postgresql
+        image: postgres:9.5.1
+        # volumes:
+        #     - ~/volumes/jhipster/myuaa/postgresql/:/var/lib/postgresql/
+        environment:
+            - POSTGRES_USER=myuaa
+            - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432

@@ -1,0 +1,30 @@
+version: '2'
+services:
+    myuaagateway-cassandra:
+        container_name: myuaagateway-cassandra
+        image: cassandra:2.2.5
+        # volumes:
+        #     - ~/volumes/jhipster/myuaagateway/cassandra/:/var/lib/cassandra/data
+        ports:
+            - 7000:7000
+            - 7001:7001
+            - 7199:7199
+            - 9042:9042
+            - 9160:9160
+    myuaagateway-cassandra-node:
+        image: cassandra:2.2.5
+        links:
+            - myuaagateway-cassandra:seed
+        environment:
+            - CASSANDRA_SEEDS=seed
+    myuaagateway-cassandra-migration:
+        container_name: myuaagateway-cassandra-migration
+        links:
+            - myuaagateway-cassandra
+        environment:
+            - CASSANDRA_CONTACT_POINT=myuaagateway-cassandra
+        build:
+            context: .
+            dockerfile: cassandra/Cassandra.Dockerfile
+        volumes:
+            - ../resources/config/cql:/cql:ro

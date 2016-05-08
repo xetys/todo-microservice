@@ -1,0 +1,13 @@
+{
+  "generator-jhipster": {
+    "appsFolders": [
+      "myuaa",
+      "myuaagateway",
+      "todo"
+    ],
+    "directoryPath": "../",
+    "useElk": true,
+    "adminPassword": "admin",
+    "jwtSecretKey": "c74156141f6c1949ce62bf25f6b476eb4a168a89"
+  }
+}

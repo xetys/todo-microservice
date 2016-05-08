@@ -1,0 +1,68 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myTodoEntryLabel" translate="myuaagatewayApp.todoEntry.home.createOrEditLabel">Create or edit a Todo Entry</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.todoEntry.id">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.todoEntry.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myuaagatewayApp.todoEntry.title" for="field_title">Title</label>
+            <input type="text" class="form-control" name="title" id="field_title"
+                    ng-model="vm.todoEntry.title"
+                    required />
+            <div ng-show="editForm.title.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.title.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myuaagatewayApp.todoEntry.percentDone" for="field_percentDone">Percent Done</label>
+            <input type="number" class="form-control" name="percentDone" id="field_percentDone"
+                    ng-model="vm.todoEntry.percentDone"
+                    min="0" max="100" />
+            <div ng-show="editForm.percentDone.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.percentDone.$error.min" translate="entity.validation.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.percentDone.$error.max" translate="entity.validation.max" translate-value-max="100">
+                    This field cannot be more than 100.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.percentDone.$error.number" translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myuaagatewayApp.todoEntry.deadLine" for="field_deadLine">Dead Line</label>
+                <div class="input-group">
+                    <input id="field_deadLine" type="text" class="form-control" name="deadLine" uib-datepicker-popup="{{dateformat}}" ng-model="vm.todoEntry.deadLine" is-open="vm.datePickerOpenStatus.deadLine"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('deadLine')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

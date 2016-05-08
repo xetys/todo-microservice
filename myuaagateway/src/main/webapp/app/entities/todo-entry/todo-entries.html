@@ -1,0 +1,64 @@
+<div>
+    <h2 translate="myuaagatewayApp.todoEntry.home.title">Todo Entries</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="todo-entry.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  translate="myuaagatewayApp.todoEntry.home.createLabel">
+                        Create new Todo Entry
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="title"><span translate="myuaagatewayApp.todoEntry.title">Title</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="percentDone"><span translate="myuaagatewayApp.todoEntry.percentDone">Percent Done</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="deadLine"><span translate="myuaagatewayApp.todoEntry.deadLine">Dead Line</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="todoEntry in vm.todoEntries track by todoEntry.id">
+                    <td><a ui-sref="todo-entry-detail({id:todoEntry.id})">{{todoEntry.id}}</a></td>
+                    <td>{{todoEntry.title}}</td>
+                    <td>{{todoEntry.percentDone}}</td>
+                        <td>{{todoEntry.deadLine | date:'mediumDate'}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="todo-entry-detail({id:todoEntry.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="todo-entry.edit({id:todoEntry.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="todo-entry.delete({id:todoEntry.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount"></jhi-item-count>
+    </div>
+    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
+</div>
